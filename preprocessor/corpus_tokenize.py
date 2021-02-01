@@ -34,7 +34,7 @@ def corpus_tokenizer(inputs):
             eng_lang_tokenizer(inputs['SRC_TRAIN_FILE'],src_tokenized_file) 
             eng_lang_tokenizer(inputs['DEV_SRC'],src_dev_tokenized_file) 
             
-        logger.info("Corpus Tokenization finished!")
+        logger.info("Tokenization finished!")
         sp.train_spm(src_tokenized_file,sp_model_prefix_src, 24000, 'bpe')
         logger.info("corpus_tokenizer preprocessing,sentencepiece model src trained")
         sp.train_spm(tgt_tokenized_file,sp_model_prefix_tgt, 24000, 'bpe')

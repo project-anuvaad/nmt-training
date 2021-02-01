@@ -16,7 +16,7 @@ def train_spm(input_file,prefix,vocab_size,model_type):
         logger.info("sp models successfully transfered and removed")
         return
     except Exception as e:
-        logger.error("something went wrong!: ",e)
+        logger.error("Error during SPM training: ",e)
         logger.error("Unexpected error:", sys.exc_info()[0])
         raise
 

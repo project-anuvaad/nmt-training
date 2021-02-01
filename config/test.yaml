@@ -1,0 +1,74 @@
+# Test yaml for opennmt training
+
+## Where the samples will be written
+save_data: data/run0/run0_data
+## Where the vocab(s) will be written
+src_vocab: data/run0/run0.vocab.src
+tgt_vocab: data/run0/run0.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus:
+        path_src: en-bn-19jan/anuvaad_training_2021_v1.en
+        path_tgt: en-bn-19jan/anuvaad_training_2021_v1.bn
+        transforms: [sentencepiece]
+    valid:
+        path_src: data/wmt/valid.en
+        path_tgt: data/wmt/valid.de
+        transforms: [sentencepiece]    
+
+### Transform related opts:
+#### Subword
+src_subword_model: enBeng-en-to-bn-4-2021-01-19-24k.model
+tgt_subword_model: bengali-en-to-bn-4-2021-01-19-24k.model
+src_subword_nbest: 1
+src_subword_alpha: 0.0
+tgt_subword_nbest: 1
+tgt_subword_alpha: 0.0
+#### Filter
+src_seq_length: 200
+tgt_seq_length: 200
+
+# silently ignore empty lines in the data
+skip_empty_level: silent        
+
+# General opts
+# Where to save the checkpoints
+save_model: model/run0/model
+save_checkpoint_steps: 10000
+train_steps: 200000
+valid_steps: 10000   
+
+# Batching
+# # Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 6000
+max_generator_batches: 2
+accum_count: [2]
+
+# Optimization
+normalization: "tokens"
+optim: "adam"
+learning_rate: 0.25
+adam_beta2: 0.998
+decay_method: "noam"
+warmup_steps: 8000
+max_grad_norm: 0
+param_init: 0
+param_init_glorot: true
+label_smoothing: 0.1
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout: [0.1]
+position_encoding: true
