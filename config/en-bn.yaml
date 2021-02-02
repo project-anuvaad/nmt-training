@@ -11,17 +11,17 @@ overwrite: False
 # Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
-        path_src: en-bn-19jan/anuvaad_training_2021_v1.en
-        path_tgt: en-bn-19jan/anuvaad_training_2021_v1.bn
+        path_src: data/src_train_tok-test_en-to-bn-0.txt
+        path_tgt: data/tgt_train_tok-test_en-to-bn-0.txt
         transforms: [sentencepiece]
     valid:
-        path_src: data/wmt/valid.en
-        path_tgt: data/wmt/valid.de
+        path_src: data/src_dev_tok-test_en-to-bn-0.txt
+        path_tgt: data/tgt_dev_tok-test_en-to-bn-0.txt
         transforms: [sentencepiece]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/enBeng-en-to-bn-4-2021-01-19-24k.model
-tgt_subword_model: model/sentencepiece_models/bengali-en-to-bn-4-2021-01-19-24k.model
+src_subword_model: model/sentencepiece_models/en_test_en-to-bn-0-2021-02-02-24k.model
+tgt_subword_model: model/sentencepiece_models/bn_test_en-to-bn-0-2021-02-02-24k.model
 
 #### Filter
 src_seq_length: 200
@@ -32,7 +32,7 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/test_en-to-bn-0/model_test_en-to-bn-0_date_model
+save_model: model/test_en-to-bn-0/model_test_en-to-bn-0_2021-02-02_model
 save_checkpoint_steps: 10000
 train_steps: 200000
 valid_steps: 10000   

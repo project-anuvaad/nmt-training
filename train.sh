@@ -5,4 +5,4 @@ echo "********** Build vocab finished! ************"
 echo "********** Training Starting! ************"
 onmt_train -config config/en-bn.yaml
 
-# tensorboard --logdir='runs/onmt/' --port=3003
+# tensorboard --bind_all --logdir='runs/onmt/' --port=3003
