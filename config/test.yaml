@@ -8,7 +8,7 @@ tgt_vocab: data/run0/run0.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
-# Corpus opts:
+# Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
         path_src: en-bn-19jan/anuvaad_training_2021_v1.en
@@ -20,13 +20,9 @@ data:
         transforms: [sentencepiece]    
 
 ### Transform related opts:
-#### Subword
 src_subword_model: enBeng-en-to-bn-4-2021-01-19-24k.model
 tgt_subword_model: bengali-en-to-bn-4-2021-01-19-24k.model
-src_subword_nbest: 1
-src_subword_alpha: 0.0
-tgt_subword_nbest: 1
-tgt_subword_alpha: 0.0
+
 #### Filter
 src_seq_length: 200
 tgt_seq_length: 200
@@ -40,6 +36,8 @@ save_model: model/run0/model
 save_checkpoint_steps: 10000
 train_steps: 200000
 valid_steps: 10000   
+tensorboard: true
+tensorboard_log_dir:  runs/onmt
 
 # Batching
 # # Train on a single GPU
