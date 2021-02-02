@@ -1,0 +1,72 @@
+# Test yaml for opennmt training
+
+## Where the samples will be written
+save_data: data/test_en-to-bn-0/test_en-to-bn-0_data
+## Where the vocab(s) will be written
+src_vocab: data/test_en-to-bn-0/test_en-to-bn-0.vocab.src
+tgt_vocab: data/test_en-to-bn-0/test_en-to-bn-0.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts(word tokenized corpus,refer preprocess.py):
+data:
+    corpus:
+        path_src: en-bn-19jan/anuvaad_training_2021_v1.en
+        path_tgt: en-bn-19jan/anuvaad_training_2021_v1.bn
+        transforms: [sentencepiece]
+    valid:
+        path_src: data/wmt/valid.en
+        path_tgt: data/wmt/valid.de
+        transforms: [sentencepiece]    
+
+### Transform related opts:
+src_subword_model: model/sentencepiece_models/enBeng-en-to-bn-4-2021-01-19-24k.model
+tgt_subword_model: model/sentencepiece_models/bengali-en-to-bn-4-2021-01-19-24k.model
+
+#### Filter
+src_seq_length: 200
+tgt_seq_length: 200
+
+# silently ignore empty lines in the data
+skip_empty_level: silent        
+
+# General opts
+# Where to save the checkpoints
+save_model: model/test_en-to-bn-0/model_test_en-to-bn-0_date_model
+save_checkpoint_steps: 10000
+train_steps: 200000
+valid_steps: 10000   
+tensorboard: true
+tensorboard_log_dir:  runs/onmt
+
+# Batching
+# # Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 6000
+max_generator_batches: 2
+accum_count: [2]
+
+# Optimization
+normalization: "tokens"
+optim: "adam"
+learning_rate: 0.25
+adam_beta2: 0.998
+decay_method: "noam"
+warmup_steps: 8000
+max_grad_norm: 0
+param_init: 0
+param_init_glorot: true
+label_smoothing: 0.1
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout: [0.1]
+position_encoding: true
