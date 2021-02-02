@@ -1,27 +1,27 @@
 # Test yaml for opennmt training
 
 ## Where the samples will be written
-save_data: data/test_en-to-bn-0/test_en-to-bn-0_data
+save_data: data/test_en-to-bn-1/test_en-to-bn-1_data
 ## Where the vocab(s) will be written
-src_vocab: data/test_en-to-bn-0/test_en-to-bn-0.vocab.src
-tgt_vocab: data/test_en-to-bn-0/test_en-to-bn-0.vocab.tgt
+src_vocab: data/test_en-to-bn-1/test_en-to-bn-1.vocab.src
+tgt_vocab: data/test_en-to-bn-1/test_en-to-bn-1.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 # Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
-        path_src: data/src_train_tok-test_en-to-bn-0.txt
-        path_tgt: data/tgt_train_tok-test_en-to-bn-0.txt
+        path_src: data/src_train_tok-test_en-to-bn-1.txt
+        path_tgt: data/tgt_train_tok-test_en-to-bn-1.txt
         transforms: [sentencepiece]
     valid:
-        path_src: data/src_dev_tok-test_en-to-bn-0.txt
-        path_tgt: data/tgt_dev_tok-test_en-to-bn-0.txt
+        path_src: data/src_dev_tok-test_en-to-bn-1.txt
+        path_tgt: data/tgt_dev_tok-test_en-to-bn-1.txt
         transforms: [sentencepiece]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/en_test_en-to-bn-0-2021-02-02-24k.model
-tgt_subword_model: model/sentencepiece_models/bn_test_en-to-bn-0-2021-02-02-24k.model
+src_subword_model: model/sentencepiece_models/en_test_en-to-bn-1-2021-02-02-24k.model
+tgt_subword_model: model/sentencepiece_models/bn_test_en-to-bn-1-2021-02-02-24k.model
 
 #### Filter
 src_seq_length: 200
@@ -32,7 +32,7 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/test_en-to-bn-0/model_test_en-to-bn-0_2021-02-02_model
+save_model: model/test_en-to-bn-1/model_test_en-to-bn-1_2021-02-02_model
 save_checkpoint_steps: 10000
 train_steps: 200000
 valid_steps: 10000   
