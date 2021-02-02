@@ -7,3 +7,15 @@ runs
 
 # Environments
 .env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# vscode
+.vscode
+
+# nohup
+nohup.out
+
+# logfile
+training_log_file.txt

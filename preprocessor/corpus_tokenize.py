@@ -1,12 +1,13 @@
-import logging
+from utilities.logging import init_logger
 import os
 import utilities.sentencepiece_util as sp
 import datetime
+import config
 
 DATA_FOLDER = 'data/'
 LANGUAGE_CODE = {'indic':['hi','bn','mr','ta','ml','gu','kn','te','pa'],'english':'en'}
 date_now = datetime.datetime.now().strftime('%Y-%m-%d')
-logger = logging.getLogger()
+logger = init_logger(config.TRAIN_LOG_FILE)
 
 def corpus_tokenizer(inputs):
     try:
@@ -30,7 +31,7 @@ def corpus_tokenizer(inputs):
         elif src_lang == LANGUAGE_CODE['english'] and tgt_lang in LANGUAGE_CODE['indic']:
             logger.info("src:english || tgt:indic")  
             indic_lang_tokenizer(tgt_lang,inputs['TGT_TRAIN_FILE'],tgt_tokenized_file)
-            indic_lang_tokenizer(inputs['DEV_TGT'],tgt_dev_tokenized_file)
+            indic_lang_tokenizer(tgt_lang,inputs['DEV_TGT'],tgt_dev_tokenized_file)
             eng_lang_tokenizer(inputs['SRC_TRAIN_FILE'],src_tokenized_file) 
             eng_lang_tokenizer(inputs['DEV_SRC'],src_dev_tokenized_file) 
             
@@ -47,7 +48,7 @@ def corpus_tokenizer(inputs):
                "tgt_dev_tokenized_file":tgt_dev_tokenized_file}
 
     except Exception as e:
-        logger.info("error in english_hindi anuvaad script: {}".format(e))
+        logger.info("error in corpus_tokenizer: {}".format(e))
         
 def indic_lang_tokenizer(lang_code, input_file,output_file):
     '''

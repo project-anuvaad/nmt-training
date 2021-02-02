@@ -1,10 +1,11 @@
 import sentencepiece as spm
 import sys
-import logging
+from utilities.logging import init_logger
 import os
+import config
 
 SENTENCEPIECE_MODEL_DIR = 'model/sentencepiece_models/'
-logger = logging.getLogger()
+logger = init_logger(config.TRAIN_LOG_FILE)
 
 def train_spm(input_file,prefix,vocab_size,model_type):  
     try:

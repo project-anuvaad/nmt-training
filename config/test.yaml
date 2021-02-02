@@ -1,10 +1,10 @@
 # Test yaml for opennmt training
 
 ## Where the samples will be written
-save_data: data/run0/run0_data
+save_data: data/exp_key/exp_key_data
 ## Where the vocab(s) will be written
-src_vocab: data/run0/run0.vocab.src
-tgt_vocab: data/run0/run0.vocab.tgt
+src_vocab: data/exp_key/exp_key.vocab.src
+tgt_vocab: data/exp_key/exp_key.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
@@ -20,8 +20,8 @@ data:
         transforms: [sentencepiece]    
 
 ### Transform related opts:
-src_subword_model: enBeng-en-to-bn-4-2021-01-19-24k.model
-tgt_subword_model: bengali-en-to-bn-4-2021-01-19-24k.model
+src_subword_model: model/sentencepiece_models/enBeng-en-to-bn-4-2021-01-19-24k.model
+tgt_subword_model: model/sentencepiece_models/bengali-en-to-bn-4-2021-01-19-24k.model
 
 #### Filter
 src_seq_length: 200
@@ -32,7 +32,7 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/run0/model
+save_model: model/exp_key/model_exp_key_date_model
 save_checkpoint_steps: 10000
 train_steps: 200000
 valid_steps: 10000   

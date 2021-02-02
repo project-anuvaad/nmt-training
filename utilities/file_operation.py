@@ -1,4 +1,8 @@
 import random
+from utilities.logging import init_logger
+import config
+
+logger = init_logger(config.TRAIN_LOG_FILE)
 
 ## below is for dropping duplicate from text file
 def drop_duplicate(inFile,outFile):
@@ -55,7 +59,7 @@ def split_into_train_validation(input_file,train_file,validation_file,percentage
         else:
           outfile_val.write(line)
   except Exception as e:
-    print(e)
+    logger.error("Error: split_into_train_validation,in format_handler",e)
 
 def shuffle_file(in_file,out_file):
   "for shuffling a single file. Current use case is to shuffle tab sep file in scripts"
@@ -63,7 +67,7 @@ def shuffle_file(in_file,out_file):
     lines = open(in_file).readlines()
     random.shuffle(lines)
     open(out_file, 'w').writelines(lines)
-    print("shuffling successful")
+    logger.info("shuffling successful")
     
   except Exception as e:
-    print("Error: while shuffling file,in format_handler",e)
+    logger.error("Error: while shuffling file,in format_handler",e)

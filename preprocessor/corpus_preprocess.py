@@ -1,10 +1,11 @@
-import logging
+from utilities.logging import init_logger
 import os
 import utilities.format_handler as format_handler
 import utilities.file_operation as file_operation
+import config
 
 DATA_FOLDER = 'data/'
-logger = logging.getLogger()
+logger = init_logger(config.TRAIN_LOG_FILE)
 
 def corpus_preprocessing(src_file,tgt_file,key):
     try:

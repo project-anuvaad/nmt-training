@@ -1,9 +1,11 @@
 import re
 from dateutil.parser import parse
 import random
-import logging
+from utilities.logging import init_logger
 from config.regex_pattern import hindi_numbers,patterns
+import config
 
+logger = init_logger(config.TRAIN_LOG_FILE)
 
 def tag_number_date_url(in_file,out_file):
   try:    
@@ -25,7 +27,6 @@ def tag_number_date_url(in_file,out_file):
             xlines[i] = xlines[i].replace(str(j),'NnUuMm'+str(hindi_numbers[count_number]),1)
             count_number +=1
             if count_number >50:
-              print("count exceeding 50")
               count_number = 50
 
           for word in xlines[i].split():
@@ -42,7 +43,7 @@ def tag_number_date_url(in_file,out_file):
         print("url: ",ext_url)
     
   except Exception as e:
-    logger.info("Error in corpus/helper_function/format handler, ignoring it-{}".format(e))
+    logger.error("Error in corpus/helper_function/format handler, ignoring it-{}".format(e))
     pass
 
 def token_is_date(token):
@@ -52,10 +53,10 @@ def token_is_date(token):
     except ValueError:
         return False
     except OverflowError:
-      print("overflow error while parsing date, treating them as Date tag{}".format(token))
+      logger.info("overflow error while parsing date, treating them as Date tag{}".format(token))
       return True    
     except Exception as e:
-      print("error in date parsing for token:{} ".format(token),e)
+      logger.info("error in date parsing for token:{} ".format(token),e)
       return False
 
 def token_is_url(token):
