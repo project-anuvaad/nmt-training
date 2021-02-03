@@ -6,11 +6,11 @@ import config
 
 logger = init_logger(config.TRAIN_LOG_FILE)
 
-def preprocess_pipeline(src_lang_code,tgt_lang_code,src_file,tgt_file,experiment_key):
+def preprocess_pipeline(src_lang_code,tgt_lang_code,src_file,tgt_file,src_dev_file,tgt_dev_file,experiment_key):
     try:
         logger.info("Initiate training on {} and {} for exp:{}".format(src_file,tgt_file,experiment_key))
         experiment_key = experiment_key or "default"
-        preprocessed_data = corpus_preprocess.corpus_preprocessing(src_file,tgt_file,experiment_key)
+        preprocessed_data = corpus_preprocess.corpus_preprocessing(src_file,tgt_file,src_dev_file,tgt_dev_file,experiment_key)
         preprocessed_data['experiment_key'] = experiment_key
         preprocessed_data['src_lang'],preprocessed_data['tgt_lang'] = src_lang_code,tgt_lang_code
 
@@ -25,5 +25,5 @@ def preprocess_pipeline(src_lang_code,tgt_lang_code,src_file,tgt_file,experiment
 
 if __name__ == '__main__':
     logger.info("*****Preprocess.py******")
-    preprocess_pipeline(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+    preprocess_pipeline(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])
           
