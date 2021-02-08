@@ -13,19 +13,19 @@ data:
     corpus:
         path_src: data/src_train_tok-en-to-hi-aai4b-1.txt
         path_tgt: data/tgt_train_tok-en-to-hi-aai4b-1.txt
-        transforms: [sentencepiece]
+        transforms: [sentencepiece,filtertoolong]
     valid:
         path_src: data/src_dev_tok-en-to-hi-aai4b-1.txt
         path_tgt: data/tgt_dev_tok-en-to-hi-aai4b-1.txt
-        transforms: [sentencepiece]    
+        transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
 src_subword_model: model/sentencepiece_models/en_en-to-hi-aai4b-1-2021-02-08-32000.model
 tgt_subword_model: model/sentencepiece_models/hi_en-to-hi-aai4b-1-2021-02-08-32000.model
 
 #### Filter
-src_seq_length: 200
-tgt_seq_length: 200
+src_seq_length: 180
+tgt_seq_length: 180
 
 # silently ignore empty lines in the data
 skip_empty_level: silent        
@@ -34,7 +34,7 @@ skip_empty_level: silent
 # Where to save the checkpoints
 save_model: model/en-to-hi-aai4b-1/model_en-to-hi-aai4b-1_2021-02-08_model
 save_checkpoint_steps: 10000
-train_steps: 150000
+train_steps: 300000
 valid_steps: 10000   
 tensorboard: true
 tensorboard_log_dir:  runs/onmt/en-to-hi-aai4b-1
