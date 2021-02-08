@@ -1,4 +1,4 @@
-# En-bn training
+# En-bn model training
 
 ## Where the samples will be written
 save_data: data/en-to-bn-aai4b-1/en-to-bn-aai4b-1_data
@@ -24,8 +24,8 @@ src_subword_model: model/sentencepiece_models/en_en-to-bn-aai4b-1-2021-02-08-240
 tgt_subword_model: model/sentencepiece_models/bn_en-to-bn-aai4b-1-2021-02-08-24000.model
 
 #### Filter
-src_seq_length: 190
-tgt_seq_length: 190
+src_seq_length: 180
+tgt_seq_length: 180
 
 # silently ignore empty lines in the data
 skip_empty_level: silent        
