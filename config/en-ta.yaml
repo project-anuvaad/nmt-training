@@ -13,11 +13,11 @@ data:
     corpus:
         path_src: data/src_train_tok-en-to-ta-aai4b-1.txt
         path_tgt: data/tgt_train_tok-en-to-ta-aai4b-1.txt
-        transforms: [sentencepiece]
+        transforms: [sentencepiece,filtertoolong]
     valid:
         path_src: data/src_dev_tok-en-to-ta-aai4b-1.txt
         path_tgt: data/tgt_dev_tok-en-to-ta-aai4b-1.txt
-        transforms: [sentencepiece]    
+        transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
 src_subword_model: model/sentencepiece_models/en_en-to-ta-aai4b-1-2021-02-08-24000.model
