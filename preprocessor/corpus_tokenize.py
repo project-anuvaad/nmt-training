@@ -12,9 +12,10 @@ logger = init_logger(config.TRAIN_LOG_FILE)
 def corpus_tokenizer(inputs):
     try:
         experiment_key = inputs['experiment_key']
+        vocab_size = inputs['vocab_size']
         src_lang,tgt_lang = inputs['src_lang'],inputs['tgt_lang']
-        sp_model_prefix_src = '{}_{}-{}-24k'.format(src_lang,experiment_key,date_now)
-        sp_model_prefix_tgt = '{}_{}-{}-24k'.format(tgt_lang,experiment_key,date_now)
+        sp_model_prefix_src = '{}_{}-{}-{}'.format(src_lang,experiment_key,date_now,vocab_size)
+        sp_model_prefix_tgt = '{}_{}-{}-{}'.format(tgt_lang,experiment_key,date_now,vocab_size)
         src_tokenized_file = os.path.join(DATA_FOLDER, 'src_train_tok'+'-'+experiment_key+'.txt')
         src_dev_tokenized_file = os.path.join(DATA_FOLDER, 'src_dev_tok'+'-'+experiment_key+'.txt')
         tgt_tokenized_file = os.path.join(DATA_FOLDER, 'tgt_train_tok'+'-'+experiment_key+'.txt')
@@ -36,12 +37,12 @@ def corpus_tokenizer(inputs):
             eng_lang_tokenizer(inputs['DEV_SRC'],src_dev_tokenized_file) 
             
         logger.info("Tokenization finished!")
-        sp.train_spm(src_tokenized_file,sp_model_prefix_src, 24000, 'bpe')
+        sp.train_spm(src_tokenized_file,sp_model_prefix_src, vocab_size, 'bpe')
         logger.info("corpus_tokenizer preprocessing,sentencepiece model src trained")
-        sp.train_spm(tgt_tokenized_file,sp_model_prefix_tgt, 24000, 'bpe')
+        sp.train_spm(tgt_tokenized_file,sp_model_prefix_tgt, vocab_size, 'bpe')
         logger.info("corpus_tokenizer preprocessing,sentencepiece model tgt trained")
 
-        os.system('rm -f {0} {1} {2} {3}'.format(inputs['SRC_TRAIN_FILE'],inputs['DEV_SRC'],inputs['TGT_TRAIN_FILE'],inputs['DEV_TGT']))
+        # os.system('rm -f {0} {1} {2} {3}'.format(inputs['SRC_TRAIN_FILE'],inputs['DEV_SRC'],inputs['TGT_TRAIN_FILE'],inputs['DEV_TGT']))
         logger.info("Removed intermediate files, corpus_tokenizer preprocessing finished!")
 
         return {"src_tokenized_file":src_tokenized_file,"tgt_tokenized_file":tgt_tokenized_file,"src_dev_tokenized_file":src_dev_tokenized_file, \

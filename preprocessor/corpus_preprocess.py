@@ -57,3 +57,29 @@ def build_train_dev_set():
     '''        
     file_operation.split_into_train_validation(shuffled_tab_sep_file,train_file,dev_file,0.995)
     logger.info("splitted file into train and validation set")
+    
+def corpus_shuffling(src_file,tgt_file,key):
+    '''
+    Performs only corpus shuffling
+    '''
+    tab_sep_out_file = os.path.join(DATA_FOLDER, 'tab_sep_corpus'+'-'+key+'.txt')
+    shuffled_tab_sep_file = os.path.join(DATA_FOLDER, 'shuffled_tab_sep_file'+'-'+key+'.txt')
+    src_seperated = os.path.join(DATA_FOLDER, 'src_train_separated'+'-'+key+'.txt')
+    tgt_seperated = os.path.join(DATA_FOLDER, 'tgt_train_separated'+'-'+key+'.txt')
+    
+    file_operation.tab_separated_parllel_corpus(tgt_file, src_file, tab_sep_out_file)
+    logger.info("tab separated corpus created")
+    logger.info(os.system('wc -l {}'.format(tab_sep_out_file)))
+    
+    file_operation.shuffle_file(tab_sep_out_file,shuffled_tab_sep_file)
+    logger.info("tab_sep_file_shuffled_successfully!")
+
+    file_operation.separate_corpus(0, shuffled_tab_sep_file, src_seperated)
+    file_operation.separate_corpus(1, shuffled_tab_sep_file, tgt_seperated)
+    logger.info("corpus separated into src and tgt for training after shuffling")
+    
+    os.system('rm -f {0} {1}'.format(tab_sep_out_file,shuffled_tab_sep_file))
+    logger.info("intermediate files are removed successfully,corpus_shuffling") 
+    
+    return {'SRC_TRAIN_FILE':src_seperated,'TGT_TRAIN_FILE':tgt_seperated}
+        
