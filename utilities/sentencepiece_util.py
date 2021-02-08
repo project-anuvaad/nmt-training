@@ -31,8 +31,8 @@ def encode_as_pieces(load_model,src_file,tgt_file):
                 xlines= xh.readlines()
         
                 for i in range(len(xlines)):
-                    encLine = sp.encode_as_pieces(xlines[i])
-                    outfile.write(str(encLine))
+                    encLine = " ".join(sp.encode_as_pieces(xlines[i]))
+                    outfile.write((encLine))
                     outfile.write("\n")
     except Exception as e:
         print("something went wrong!: ",e)
@@ -61,22 +61,10 @@ def decode_as_pieces(load_model,src_file,tgt_file):
             with open(tgt_file,"w") as outfile:
                 xlines= xh.readlines()
         
-                for i in range(len(xlines)):
-                    xlines[i] = xlines[i][0]+xlines[i][1:-1].replace('[',"")+xlines[i][-1] 
-                    xlines[i] = xlines[i][0]+xlines[i][1:-1].replace(']',"")+xlines[i][-1] 
-
-                    if not xlines[i].startswith("["):
-                        print("here1")
-                        xlines[i] = "["+xlines[i].rstrip()
-                   
-                    if not xlines[i].rstrip().endswith("]"):
-                        print("here2")
-                        print(xlines[i])
-                        xlines[i] = xlines[i].rstrip()+"]" 
-                        print(xlines[i])
-                                 
-                    encLine = spH.DecodePieces(eval(xlines[i]))
-                    outfile.write(str(encLine))
+                for i in range(len(xlines)):     
+                    xlines[i] = xlines[i].strip('\n')                            
+                    encLine = spH.DecodePieces(xlines[i].split(" "))
+                    outfile.write(encLine)
                     outfile.write("\n")
     except Exception as e:
         print("something went wrong!: ",e)

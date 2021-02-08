@@ -4,6 +4,7 @@ model/sentencepiece_models/*
 !model/sentencepiece_models/.gitkeep
 model/*
 runs
+available_models/*
 
 # Environments
 .env
