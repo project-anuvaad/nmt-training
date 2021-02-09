@@ -20,8 +20,8 @@ data:
         transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/en_en-to-bn-aai4b-1.1-2021-02-09-24000.model
-tgt_subword_model: model/sentencepiece_models/bn_en-to-bn-aai4b-1.1-2021-02-09-24000.model
+src_subword_model: model/sentencepiece_models/en_en-to-bn-aai4b-1.1-2021-02-09-26000.model
+tgt_subword_model: model/sentencepiece_models/bn_en-to-bn-aai4b-1.1-2021-02-09-26000.model
 
 #### Filter
 src_seq_length: 180
