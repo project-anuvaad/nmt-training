@@ -1,27 +1,27 @@
 # En-bn model training
 
 ## Where the samples will be written
-save_data: data/en-to-bn-aai4b-1/en-to-bn-aai4b-1_data
+save_data: data/en-to-bn-aai4b-1.1/en-to-bn-aai4b-1.1_data
 ## Where the vocab(s) will be written
-src_vocab: data/en-to-bn-aai4b-1/en-to-bn-aai4b-1.vocab.src
-tgt_vocab: data/en-to-bn-aai4b-1/en-to-bn-aai4b-1.vocab.tgt
+src_vocab: data/en-to-bn-aai4b-1.1/en-to-bn-aai4b-1.1.vocab.src
+tgt_vocab: data/en-to-bn-aai4b-1.1/en-to-bn-aai4b-1.1.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 # Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
-        path_src: data/src_train_tok-en-to-bn-aai4b-1.txt
-        path_tgt: data/tgt_train_tok-en-to-bn-aai4b-1.txt
+        path_src: data/src_train_tok-en-to-bn-aai4b-1.1.txt
+        path_tgt: data/tgt_train_tok-en-to-bn-aai4b-1.1.txt
         transforms: [sentencepiece,filtertoolong]
     valid:
-        path_src: data/src_dev_tok-en-to-bn-aai4b-1.txt
-        path_tgt: data/tgt_dev_tok-en-to-bn-aai4b-1.txt
+        path_src: data/src_dev_tok-en-to-bn-aai4b-1.1.txt
+        path_tgt: data/tgt_dev_tok-en-to-bn-aai4b-1.1.txt
         transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/en_en-to-bn-aai4b-1-2021-02-08-24000.model
-tgt_subword_model: model/sentencepiece_models/bn_en-to-bn-aai4b-1-2021-02-08-24000.model
+src_subword_model: model/sentencepiece_models/en_en-to-bn-aai4b-1.1-2021-02-09-24000.model
+tgt_subword_model: model/sentencepiece_models/bn_en-to-bn-aai4b-1.1-2021-02-09-24000.model
 
 #### Filter
 src_seq_length: 180
@@ -32,12 +32,12 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/en-to-bn-aai4b-1/model_en-to-bn-aai4b-1_2021-02-08_model
+save_model: model/en-to-bn-aai4b-1.1/model_en-to-bn-aai4b-1.1_2021-02-09_model
 save_checkpoint_steps: 10000
-train_steps: 250000
+train_steps: 260000
 valid_steps: 10000   
 tensorboard: true
-tensorboard_log_dir:  runs/onmt/en-to-bn-aai4b-1
+tensorboard_log_dir:  runs/onmt/en-to-bn-aai4b-1.1
 
 # Batching
 # # Train on a single GPU
