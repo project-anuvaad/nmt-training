@@ -1,2 +1,2 @@
 # nmt-training
-General purpose training repository using OpenNMT packages.
+General purpose training repository using OpenNMT-py packages.
