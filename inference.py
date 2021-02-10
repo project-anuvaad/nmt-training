@@ -36,5 +36,4 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
 
 
 if __name__ == '__main__':
-    logger.info("*****Inference.py******")
     generate_inference(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])     
