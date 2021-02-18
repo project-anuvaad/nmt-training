@@ -4,7 +4,7 @@ import sys
 
 DATA_FOLDER = 'data/'
 
-def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_lang_code):
+def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_lang_code,ref_file):
     try: 
         prediction_folder = os.path.join(DATA_FOLDER, 'prediction')
         if not os.path.exists(prediction_folder):
@@ -21,7 +21,16 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
         os.system('onmt_translate -model {0} -src {1} \
                   -output {2} -verbose -beam_size 5 -gpu 0'.format(nmt_model,test_src_encoded,output))
         sp.decode_as_pieces(decoder_model,output,output_decoded)  
-        os.system('python ./tools/indic_detokenize.py {0} {1} {2}'.format(output_decoded,output_final,tgt_lang_code))                
+        os.system('python ./tools/indic_detokenize.py {0} {1} {2}'.format(output_decoded,output_final,tgt_lang_code)) 
+        
+        print("bleu operation begin")
+        nmt_out_tok_file = os.path.join(prediction_folder, 'nmt_out_tok_file'+'-'+key+'.txt')
+        ref_tok_file = os.path.join(prediction_folder, 'ref_tok_file'+'-'+key+'.txt')
+        os.system('python indic_tokenize.py {0} {1} {2}'.format(output_final,nmt_out_tok_file,tgt_lang_code))
+        os.system('python indic_tokenize.py {0} {1} {2}'.format(ref_file,ref_tok_file,tgt_lang_code))
+        os.system('sacrebleu --tokenize none {0} < {1}'.format(ref_tok_file,nmt_out_tok_file))
+        os.system('perl multi-bleu-detok.perl {0} < {1}'.format(ref_file,output_final))
+               
         
     except Exception as e:
         print(e)    
@@ -37,4 +46,4 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
 
 
 if __name__ == '__main__':
-    generate_inference(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])     
+    generate_inference(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7])     
