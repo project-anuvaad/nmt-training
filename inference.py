@@ -32,7 +32,7 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
             os.system('sacrebleu --tokenize none {0} < {1}'.format(ref_tok_file,nmt_out_tok_file))
             os.system('perl tools/multi-bleu-detok.perl {0} < {1}'.format(ref_file,output_final))
         elif tgt_lang_code =='en':    
-            os.system('python ./tools/indic_tokenize.py {0} {1} {2}'.format(input_file,output_file,lang_code))
+            os.system('python ./tools/indic_tokenize.py {0} {1} {2}'.format(test_src,test_src_tok,'bn'))
             sp.encode_as_pieces(encoder_model,test_src_tok,test_src_encoded)
             os.system('onmt_translate -model {0} -src {1} \
                     -output {2} -verbose -beam_size 5 -gpu 0'.format(nmt_model,test_src_encoded,output))
