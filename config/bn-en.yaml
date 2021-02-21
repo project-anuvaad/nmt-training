@@ -1,27 +1,27 @@
 # Bn-En model training
 
 ## Where the samples will be written
-save_data: data/bn-to-en-aai4b-1-v3/bn-to-en-aai4b-1-v3_data
+save_data: data/bn-to-en-aai4b-2-v4/bn-to-en-aai4b-2-v4_data
 ## Where the vocab(s) will be written
-src_vocab: data/bn-to-en-aai4b-1-v3/bn-to-en-aai4b-1-v3.vocab.src
-tgt_vocab: data/bn-to-en-aai4b-1-v3/bn-to-en-aai4b-1-v3.vocab.tgt
+src_vocab: data/bn-to-en-aai4b-2-v4/bn-to-en-aai4b-2-v4.vocab.src
+tgt_vocab: data/bn-to-en-aai4b-2-v4/bn-to-en-aai4b-2-v4.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 # Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
-        path_src: data/src_train_tok-bn-to-en-aai4b-1-v3.txt
-        path_tgt: data/tgt_train_tok-bn-to-en-aai4b-1-v3.txt
+        path_src: data/src_train_tok-bn-to-en-aai4b-2-v4.txt
+        path_tgt: data/tgt_train_tok-bn-to-en-aai4b-2-v4.txt
         transforms: [sentencepiece,filtertoolong]
     valid:
-        path_src: data/src_dev_tok-bn-to-en-aai4b-1-v3.txt
-        path_tgt: data/tgt_dev_tok-bn-to-en-aai4b-1-v3.txt
+        path_src: data/src_dev_tok-bn-to-en-aai4b-2-v4.txt
+        path_tgt: data/tgt_dev_tok-bn-to-en-aai4b-2-v4.txt
         transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/bn_bn-to-en-aai4b-1-v3-2021-02-17-24000.model
-tgt_subword_model: model/sentencepiece_models/en_bn-to-en-aai4b-1-v3-2021-02-17-24000.model
+src_subword_model: model/sentencepiece_models/bn_bn-to-en-aai4b-2-v4-2021-02-21-36000.model
+tgt_subword_model: model/sentencepiece_models/en_bn-to-en-aai4b-2-v4-2021-02-21-36000.model
 
 #### Filter
 src_seq_length: 200
@@ -32,12 +32,12 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/bn-to-en-aai4b-1-v3/model_bn-to-en-aai4b-1-v3_2021-02-17_model
+save_model: model/bn-to-en-aai4b-2-v4/model_bn-to-en-aai4b-2-v4_2021-02-21_model
 save_checkpoint_steps: 10000
-train_steps: 300000
+train_steps: 500000
 valid_steps: 10000   
 tensorboard: true
-tensorboard_log_dir:  /opt/share/NMT/runs/bn-to-en-aai4b-1-v3
+tensorboard_log_dir:  /opt/share/NMT/runs/bn-to-en-aai4b-2-v4
 
 # Batching
 # # Train on a single GPU
