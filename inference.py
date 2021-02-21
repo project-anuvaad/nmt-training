@@ -20,7 +20,7 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
             os.system('perl ./tools/tokenizer.perl <{0}> {1}'.format(test_src, test_src_tok))
             sp.encode_as_pieces(encoder_model,test_src_tok,test_src_encoded)
             os.system('onmt_translate -model {0} -src {1} \
-                    -output {2} -verbose -beam_size 5 '.format(nmt_model,test_src_encoded,output))
+                    -output {2} -verbose -beam_size 5 -gpu 0'.format(nmt_model,test_src_encoded,output))
             sp.decode_as_pieces(decoder_model,output,output_decoded)  
             os.system('python ./tools/indic_detokenize.py {0} {1} {2}'.format(output_decoded,output_final,tgt_lang_code)) 
             
@@ -35,7 +35,7 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
             os.system('python ./tools/indic_tokenize.py {0} {1} {2}'.format(input_file,output_file,lang_code))
             sp.encode_as_pieces(encoder_model,test_src_tok,test_src_encoded)
             os.system('onmt_translate -model {0} -src {1} \
-                    -output {2} -verbose -beam_size 5 '.format(nmt_model,test_src_encoded,output))
+                    -output {2} -verbose -beam_size 5 -gpu 0'.format(nmt_model,test_src_encoded,output))
             sp.decode_as_pieces(decoder_model,output,output_decoded)  
             os.system('perl ./tools/detokenize.perl <{0}> {1} -l en'.format(output_decoded,output_final))
             
