@@ -8,7 +8,7 @@ logger = init_logger(config.TRAIN_LOG_FILE)
 
 def preprocess_pipeline(src_lang_code,tgt_lang_code,src_file,tgt_file,src_dev_file,tgt_dev_file,experiment_key,vocab_size=24000):
     try:
-        do_tagging = False
+        do_tagging = True
         do_shuffling = True
         logger.info("Initiate training on {} and {} for exp:{}".format(src_file,tgt_file,experiment_key))
         experiment_key = experiment_key or "default"
