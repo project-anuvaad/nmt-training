@@ -1,4 +1,5 @@
 import utilities.sentencepiece_util as sp 
+import utilities.format_handler as format_handler
 import os
 import sys
 
@@ -14,7 +15,16 @@ def generate_inference(nmt_model,encoder_model,decoder_model,test_src,key,tgt_la
         test_src_encoded = os.path.join(prediction_folder, 'test_src_encoded'+'-'+key+'.txt')
         output = os.path.join(prediction_folder, 'output'+'-'+key+'.txt')
         output_decoded = os.path.join(prediction_folder, 'output_decoded'+'-'+key+'.txt')
-        output_final = os.path.join(prediction_folder, 'output_final'+'-'+key+'.txt')        
+        output_final = os.path.join(prediction_folder, 'output_final'+'-'+key+'.txt') 
+
+        do_tagging = True
+        if do_tagging:
+            test_src_tagged = os.path.join(prediction_folder, 'test_src_tagged'+'-'+key+'.txt')
+            ref_file_tagged = os.path.join(prediction_folder, 'ref_file_tagged'+'-'+key+'.txt')
+            format_handler.tag_number_date_url(test_src,test_src_tagged)
+            format_handler.tag_number_date_url(ref_file,ref_file_tagged) 
+            test_src = test_src_tagged
+            ref_file = ref_file_tagged      
         
         if tgt_lang_code in ['hi','bn','mr','ta','ml','gu','kn','te','pa']:
             os.system('perl ./tools/tokenizer.perl <{0}> {1}'.format(test_src, test_src_tok))
