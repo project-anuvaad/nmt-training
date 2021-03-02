@@ -20,8 +20,8 @@ data:
         transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/en_te-to-en-anuvaad-2-v1-2021-03-02-24000.model
-tgt_subword_model: model/sentencepiece_models/ta_te-to-en-anuvaad-2-v1-2021-03-02-24000.model
+src_subword_model: model/sentencepiece_models/te_te-to-en-anuvaad-2-v1-2021-03-02-24000.model
+tgt_subword_model: model/sentencepiece_models/en_te-to-en-anuvaad-2-v1-2021-03-02-24000.model
 
 #### Filter
 src_seq_length: 200

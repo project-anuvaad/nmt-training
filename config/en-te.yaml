@@ -21,7 +21,7 @@ data:
 
 ### Transform related opts:
 src_subword_model: model/sentencepiece_models/en_en-to-te-anuvaad-3-v1-2021-03-02-24000.model
-tgt_subword_model: model/sentencepiece_models/ta_en-to-te-anuvaad-3-v1-2021-03-02-24000.model
+tgt_subword_model: model/sentencepiece_models/te_en-to-te-anuvaad-3-v1-2021-03-02-24000.model
 
 #### Filter
 src_seq_length: 200
