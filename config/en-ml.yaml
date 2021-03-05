@@ -1,0 +1,72 @@
+# Te-en model training
+
+## Where the samples will be written
+save_data: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1_data
+## Where the vocab(s) will be written
+src_vocab: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1.vocab.src
+tgt_vocab: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts(word tokenized corpus,refer preprocess.py):
+data:
+    corpus:
+        path_src: data/src_train_tok-en-to-ml-anuvaad-3-v1.txt
+        path_tgt: data/tgt_train_tok-en-to-ml-anuvaad-3-v1.txt
+        transforms: [sentencepiece,filtertoolong]
+    valid:
+        path_src: data/src_dev_tok-en-to-ml-anuvaad-3-v1.txt
+        path_tgt: data/tgt_dev_tok-en-to-ml-anuvaad-3-v1.txt
+        transforms: [sentencepiece,filtertoolong]    
+
+### Transform related opts:
+src_subword_model: model/sentencepiece_models/en_en-to-ml-anuvaad-3-v1-2021-03-05-24000.model
+tgt_subword_model: model/sentencepiece_models/ml_en-to-ml-anuvaad-3-v1-2021-03-05-24000.model
+
+#### Filter
+src_seq_length: 200
+tgt_seq_length: 200
+
+# silently ignore empty lines in the data
+skip_empty_level: silent        
+
+# General opts
+# Where to save the checkpoints
+save_model: model/en-to-ml-anuvaad-3-v1/model_en-to-ml-anuvaad-3-v1_2021-03-05_model
+save_checkpoint_steps: 10000
+train_steps: 250000
+valid_steps: 10000   
+tensorboard: true
+tensorboard_log_dir:  /opt/share/NMT/runs/en-to-ml-anuvaad-3-v1
+
+# Batching
+# # Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 6000
+max_generator_batches: 2
+accum_count: [2]
+
+# Optimization
+normalization: "tokens"
+optim: "adam"
+learning_rate: 0.25
+adam_beta2: 0.998
+decay_method: "noam"
+warmup_steps: 8000
+max_grad_norm: 0
+param_init: 0
+param_init_glorot: true
+label_smoothing: 0.1
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout: [0.1]
+position_encoding: true
