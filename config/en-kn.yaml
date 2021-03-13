@@ -1,27 +1,27 @@
-# Ml-en model training
+# Kn-en model training
 
 ## Where the samples will be written
-save_data: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1_data
+save_data: data/en-to-kn-anuvaad-3-v1/en-to-kn-anuvaad-3-v1_data
 ## Where the vocab(s) will be written
-src_vocab: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1.vocab.src
-tgt_vocab: data/en-to-ml-anuvaad-3-v1/en-to-ml-anuvaad-3-v1.vocab.tgt
+src_vocab: data/en-to-kn-anuvaad-3-v1/en-to-kn-anuvaad-3-v1.vocab.src
+tgt_vocab: data/en-to-kn-anuvaad-3-v1/en-to-kn-anuvaad-3-v1.vocab.tgt
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 # Corpus opts(word tokenized corpus,refer preprocess.py):
 data:
     corpus:
-        path_src: data/src_train_tok-en-to-ml-anuvaad-3-v1.txt
-        path_tgt: data/tgt_train_tok-en-to-ml-anuvaad-3-v1.txt
+        path_src: data/src_train_tok-en-to-kn-anuvaad-3-v1.txt
+        path_tgt: data/tgt_train_tok-en-to-kn-anuvaad-3-v1.txt
         transforms: [sentencepiece,filtertoolong]
     valid:
-        path_src: data/src_dev_tok-en-to-ml-anuvaad-3-v1.txt
-        path_tgt: data/tgt_dev_tok-en-to-ml-anuvaad-3-v1.txt
+        path_src: data/src_dev_tok-en-to-kn-anuvaad-3-v1.txt
+        path_tgt: data/tgt_dev_tok-en-to-kn-anuvaad-3-v1.txt
         transforms: [sentencepiece,filtertoolong]    
 
 ### Transform related opts:
-src_subword_model: model/sentencepiece_models/en_en-to-ml-anuvaad-3-v1-2021-03-05-24000.model
-tgt_subword_model: model/sentencepiece_models/ml_en-to-ml-anuvaad-3-v1-2021-03-05-24000.model
+src_subword_model: model/sentencepiece_models/en_en-to-kn-anuvaad-3-v1-2021-03-13-24000.model
+tgt_subword_model: model/sentencepiece_models/kn_en-to-kn-anuvaad-3-v1-2021-03-13-24000.model
 
 #### Filter
 src_seq_length: 200
@@ -32,12 +32,12 @@ skip_empty_level: silent
 
 # General opts
 # Where to save the checkpoints
-save_model: model/en-to-ml-anuvaad-3-v1/model_en-to-ml-anuvaad-3-v1_2021-03-05_model
+save_model: model/en-to-kn-anuvaad-3-v1/model_en-to-kn-anuvaad-3-v1_2021-03-13_model
 save_checkpoint_steps: 10000
 train_steps: 250000
 valid_steps: 10000   
 tensorboard: true
-tensorboard_log_dir:  /opt/share/NMT/runs/en-to-ml-anuvaad-3-v1
+tensorboard_log_dir:  /opt/share/NMT/runs/en-to-kn-anuvaad-3-v1
 
 # Batching
 # # Train on a single GPU
